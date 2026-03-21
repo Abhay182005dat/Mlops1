@@ -56,3 +56,16 @@ create github repo , git init , git remote add origin <url>
 git commit 
 git push
 
+--------------------------------------
+create s3 bucket 
+create IAM users 
+pip install dvc[s3] awscli
+remove dvc remote
+dvc remote remote myremote
+aws configure
+
+dvc remote add -d myremote s3://yt-commet-analyser
+git add
+git commit 
+dvc push
+git push
