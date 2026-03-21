@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "YT Sentiment Lens",
+  "version": "1.0.0",
+  "description": "Analyze YouTube comment sentiment using AI.",
+  "permissions": ["activeTab"],
+  "host_permissions": [
+    "https://www.googleapis.com/*",
+    "http://ec2-13-48-49-1.eu-north-1.compute.amazonaws.com:5000/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
