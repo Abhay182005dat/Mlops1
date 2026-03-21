@@ -1,0 +1,58 @@
+Features of our Project :
+-> Real time sentiment Classification:
+    The plugin performs real time analysis of all comments on a Yt video , classifyimg each as positive , neutral or negative.
+
+-> sentiment Distribution Visualisation
+    Displays the overall sentiment Distribution with intuitive graphs or charts 
+
+-> Detailed Sentiment insights:
+    Allows users to drill down into each sentiment category to read specific comments classified under it.
+
+-> Trend tracking
+    Monitors how sentiment changes over time  , helping influencers identify how different conetnt affects audience perception.
+
+-> Summary of comments 
+    utilize NLP techniques to summarize all the most discussed comments (can you openai api ) , also classify group
+    of commments as feedback , concern etc.
+
+-> Additional comments features such as average comment length , spam and troll detection , this will be a separate ml model.
+x`
+
+------------------------aws setups----------------
+Create EC2 instance 
+sudo apt-get update
+sudo apt-get install python3 python3-venv python3-pip -y
+python3 -m venv mlflow_env
+source mlflow_env/bin/activate
+pip install mlflow boto3 // boto3 is just for solving some errors otherwise not needed
+pip list
+create s3 bucket 
+setup IAM role -> amazons3fullaccess -> ec2-MLFlow-S3-Access
+sudo apt-get install screen -y  
+// screen is a library where even if your ec2 sometimes shutdown and launches once again , it helps in relaunching mlflow again
+
+screen -S mlflow
+mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root s3://your-s3-bucket-name --host 0.0.0.0 --port 5000 --allowed-hosts "*" --cors-allowed-origins "*"
+three slashes because sqlite runs on a memory local file . so path config. properties...
+setup security group
+
+-------------------how to improve baseline model
+-> Handling class imbalance
+-> More complex model
+-> Hyperparameter Tuning
+-> Use of ensemble
+-> Feature Engineering
+-> Data preprocessing
+
+-------------------------------
+-> cookiecutter -c v1 http://github.com/drivendata/cookiecutter-data-science
+delete files -> rename models to model
+
+create:
+- venv - python -m venv myvenv
+- myvenv\Scripts\activate
+
+create github repo , git init , git remote add origin <url>
+git commit 
+git push
+
