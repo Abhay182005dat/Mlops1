@@ -5,7 +5,7 @@ import pickle
 from sklearn.metrics import accuracy_score , precision_score , recall_score , f1_score
 
 # Set your mlflow tracking URI
-mlflow.set_tracking_uri('http://ec2-13-48-49-1.eu-north-1.compute.amazonaws.com:5000/')
+mlflow.set_tracking_uri('http://ec2-13-51-251-184.eu-north-1.compute.amazonaws.com:5000/')
 
 @pytest.mark.parametrize('model_name , stage , holdout_data_path , vectorizer_path',[
     ('yt_chrome_plugin_model' , 'staging' , 'data/interim/test_processed.csv' , 'tfidf_vectorizer.pkl'),
