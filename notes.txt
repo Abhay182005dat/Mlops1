@@ -80,9 +80,17 @@ push code and trigger pipeline
 ensure permissions are set properly 
     Settings -> actions -> general
     workflow permissions -> read and write permissions
+    
 model testing 1 -> check model loading
 model testing 2 -> check model signature
 
 model testing 3 -> check model performance
 model promotion
 API testing
+-------------------
+see whenever cicd works , you do the dvc repro inside your pipeline , after the pipeline runs you always need to do
+dvc push then git push so that you push files such as dvc.lock which contain important information about the data 
+changes occurred through the pipeline run.
+
+thats why , as we cannot always manually push the changes to dvc and git we use gitbot to make commits automatically 
+after the dvc pipeline is run.
