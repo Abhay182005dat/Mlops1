@@ -27,7 +27,7 @@ def test_generate_chart_endpoint():
     data = {
         'sentiment_counts' : {'1':5 , '0' : 3, "-1" : 2}
     }
-    response  = requests.get(f'{BASE_URL}/generate_chart' , json=data)
+    response  = requests.post(f'{BASE_URL}/generate_chart' , json=data)
     assert response.status_code == 200
     assert response.headers['Content-type'] == 'image/png'
 
@@ -35,7 +35,7 @@ def test_generate_wordcloud_endpoint():
     data = {
         "comments" : ['This is a great product !' , 'Not worth it', "It's Okay"]
     }
-    response  = requests.get(f'{BASE_URL}/generate_wordcloud' , json=data)
+    response  = requests.post(f'{BASE_URL}/generate_wordcloud' , json=data)
     assert response.status_code == 200
     assert response.headers['Content-type'] == 'image/png'
     
@@ -48,6 +48,6 @@ def test_generate_trend_graph_endpoint():
             
         ]
     }
-    response  = requests.get(f'{BASE_URL}/generate_trend_graph' , json=data)
+    response  = requests.post(f'{BASE_URL}/generate_trend_graph' , json=data)
     assert response.status_code == 200
     assert response.headers['Content-type'] == 'image/png'
