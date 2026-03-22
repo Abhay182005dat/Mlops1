@@ -13,7 +13,7 @@ def test_load_latest_staging_model(model_name , stage):
 
     # Get the latest version version in the specifies stage
     latest_version_info = client.get_latest_versions(model_name , stages = [stage])
-    latest_version = latest_version.info[0].version if latest_version_info else None
+    latest_version = latest_version_info[0].version if latest_version_info else None
 
     assert latest_version is not None , f"No model found in the  '{stage}' stage for '{model_name}'  "
 

@@ -63,7 +63,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run:
-          git push origin ${{ github.ref_name }}  # see here once you push our main ci workflow will again trigger 
+          git push #origin ${{ github.ref_name }}  # see here once you push our main ci workflow will again trigger 
                                                   # our pipleine once again , in this way it will be inside infinite 
                                                   # hence we use ${{ github.actor != 'github-actions[bot]' }}
 # Add the model testing scripts to cicd pipeline
