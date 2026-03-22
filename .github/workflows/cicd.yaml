@@ -39,7 +39,7 @@ jobs:
       - name: Push DVC-tracked data to remote
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECREET_ACCESS_KEY: ${{ secretS.AWS_SECRET_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secretS.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: eu-north-1
         run: |
           dvc push
