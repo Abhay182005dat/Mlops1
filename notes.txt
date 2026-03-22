@@ -96,4 +96,20 @@ thats why , as we cannot always manually push the changes to dvc and git we use 
 after the dvc pipeline is run.
 
 so after running pipeline note you should also do git pull whenever you are working on repo after the
-completion of workflow. 
+completion of workflow.
+
+--------------------------------
+for docker 
+generate requirements
+-> Create dockerfile
+-> build docker image : build docker -t name/nameofrepo .
+-> run and test docker image : 
+    docker run -p 8888:5000 -e AWS_ACCESS_KEY_ID=yourkey -e AWS_SECRET_ACCESS_KEY=yoursecret name/nameofrepo
+
+-> create ecr repo 
+-> push to ecr 
+-> pull and run : docker pull arn_code/name:latest
+                  docker run -p 8888:5000 -e AWS_ACCESS_KEY_ID=yourkey -e AES_SECREET_ACCESS=YOURSECRET arnid/name:latest
+
+-> using ci workflow
+-> pull and test

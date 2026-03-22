@@ -29,7 +29,7 @@ def test_model_performance(model_name , stage , holdout_data_path , vectorizer_p
         # load the holdout test data
         holdout_data = pd.read_csv(holdout_data_path)
         X_holdout_raw = holdout_data.iloc[: , :-1].squeeze() # raw text features
-        y_holdout = holdout_data[:,-1]
+        y_holdout = holdout_data.iloc[:,-1]
 
         # Handle Nan values in the text data
         X_holdout_raw = X_holdout_raw.fillna("")
