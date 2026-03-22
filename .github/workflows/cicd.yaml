@@ -1,0 +1,42 @@
+name: CICD Pipeline
+
+on: push
+
+jobs:
+  model-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/Checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with: 
+          python-version : '3.10'
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt')}}
+        restore-keys: |
+         $({ runner.os })-pip-
+
+      - name: Install pip dependencies
+        run: |
+          pip install -r requirements.txt
+
+# Till here all this part related were for setup purposes  
+      - name: Run pipeline
+        env : 
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: eu-north-1
+        run: |
+          dvc repro
+
+
+      
+
+       

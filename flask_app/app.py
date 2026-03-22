@@ -61,7 +61,7 @@ def load_model_and_vectorizer(model_name, model_version, vectorizer_path):
     return model, vectorizer
 
 # Initialize the model and vectorizer
-model, vectorizer = load_model_and_vectorizer("my_model", "1", "./tfidf_vectorizer.pkl")  # Update paths and versions as needed
+model, vectorizer = load_model_and_vectorizer("yt_chrome_plugin_model", "1", "./tfidf_vectorizer.pkl")  # Update paths and versions as needed
 
 @app.route('/')
 def home():
@@ -84,6 +84,7 @@ def predict_with_timestamps():
         
         # Transform comments using the vectorizer
         transformed_comments = vectorizer.transform(preprocessed_comments)
+        transformed_comments = pd.DataFrame(transformed_comments.toarray(), columns = vectorizer.get_feature_names_out())
         
         # Make predictions
         predictions = model.predict(transformed_comments).tolist()  # Convert to list
@@ -111,7 +112,10 @@ def predict():
         
         # Transform comments using the vectorizer
         transformed_comments = vectorizer.transform(preprocessed_comments)
-        
+        transformed_comments = pd.DataFrame(
+            transformed_comments.toarray(),
+            columns=vectorizer.get_feature_names_out()
+        )
         # Make predictions
         predictions = model.predict(transformed_comments).tolist()  # Convert to list
         

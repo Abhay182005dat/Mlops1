@@ -69,3 +69,20 @@ git add
 git commit 
 dvc push
 git push
+
+---------------------------------------------
+generate requirements
+
+create cicd.yaml inside .github > workflows
+add aws credentials in secrets
+write code in cicd
+push code and trigger pipeline 
+ensure permissions are set properly 
+    Settings -> actions -> general
+    workflow permissions -> read and write permissions
+model testing 1 -> check model loading
+model testing 2 -> check model signature
+
+model testing 3 -> check model performance
+model promotion
+API testing

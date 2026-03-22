@@ -1,26 +1,28 @@
 // popup.js
 
-const API_BASE   = "http://ec2-13-48-49-1.eu-north-1.compute.amazonaws.com:5000";
-const YT_API_KEY = "YOUR_YOUTUBE_API_KEY_HERE";
+const API_BASE   = "http://localhost:5000";
+const YT_API_KEY = "AIzaSyDg6aYZ6fTdfz8_qi8876UYd0mnuvbMa7k";
 const MAX_COMMENTS = 100;
 
-// DOM refs
 const analyzeBtn = document.getElementById("analyzeBtn");
 const reBtn      = document.getElementById("reBtn");
 const idleEl     = document.getElementById("idle");
 const loadingEl  = document.getElementById("loading");
 const resultsEl  = document.getElementById("results");
 const errEl      = document.getElementById("err");
+const notYtEl    = document.getElementById("not-yt");
 const videoLabel = document.getElementById("videoLabel");
 
 document.addEventListener("DOMContentLoaded", () => {
 
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const url = tabs[0].url;
+    const url = tabs[0].url || "";
     const match = url.match(/^https:\/\/(?:www\.)?youtube\.com\/watch\?v=([\w-]{11})/);
 
     if (!match || !match[1]) {
-      showErr("Open a YouTube video to analyze comments.");
+      // Not a YouTube video — show message, hide everything else
+      idleEl.style.display  = "none";
+      notYtEl.style.display = "flex";
       return;
     }
 
@@ -28,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     videoLabel.textContent = videoId;
 
     analyzeBtn.addEventListener("click", () => runAnalysis(videoId));
-    reBtn.addEventListener("click", () => { resetViz(); runAnalysis(videoId); });
+    reBtn.addEventListener("click",      () => { resetViz(); runAnalysis(videoId); });
   });
 
   document.querySelectorAll(".tab").forEach(btn => {
@@ -127,14 +129,14 @@ async function callAPI(endpoint, payload) {
 async function fetchChart(counts) {
   try {
     const url = await callAPI("/generate_chart", { sentiment_counts: counts });
-    show("iChart", "lChart", url);
+    showImg("iChart", "lChart", url);
   } catch { document.getElementById("lChart").textContent = "chart failed."; }
 }
 
 async function fetchWordCloud(texts) {
   try {
     const url = await callAPI("/generate_wordcloud", { comments: texts });
-    show("iWords", "lWords", url);
+    showImg("iWords", "lWords", url);
   } catch { document.getElementById("lWords").textContent = "word cloud failed."; }
 }
 
@@ -143,11 +145,11 @@ async function fetchTrend(predictions) {
     const url = await callAPI("/generate_trend_graph", {
       sentiment_data: predictions.map(p => ({ sentiment: p.sentiment, timestamp: p.timestamp }))
     });
-    show("iTrend", "lTrend", url);
+    showImg("iTrend", "lTrend", url);
   } catch { document.getElementById("lTrend").textContent = "trend failed."; }
 }
 
-function show(imgId, loaderId, src) {
+function showImg(imgId, loaderId, src) {
   document.getElementById(imgId).src = src;
   document.getElementById(imgId).style.display = "block";
   document.getElementById(loaderId).style.display = "none";
@@ -169,12 +171,12 @@ function renderComments(predictions) {
 
 function renderBar(counts, total) {
   const pct = n => total ? Math.round((n / total) * 100) + "%" : "0%";
-  document.getElementById("pPos").textContent = pct(counts["1"] || 0);
-  document.getElementById("pNeu").textContent = pct(counts["0"] || 0);
+  document.getElementById("pPos").textContent = pct(counts["1"]  || 0);
+  document.getElementById("pNeu").textContent = pct(counts["0"]  || 0);
   document.getElementById("pNeg").textContent = pct(counts["-1"] || 0);
   requestAnimationFrame(() => {
-    document.getElementById("bPos").style.width = pct(counts["1"] || 0);
-    document.getElementById("bNeu").style.width = pct(counts["0"] || 0);
+    document.getElementById("bPos").style.width = pct(counts["1"]  || 0);
+    document.getElementById("bNeu").style.width = pct(counts["0"]  || 0);
     document.getElementById("bNeg").style.width = pct(counts["-1"] || 0);
   });
 }
