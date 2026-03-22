@@ -19,7 +19,7 @@ def test_model_performance(model_name , stage , holdout_data_path , vectorizer_p
 
         assert latest_version is not None, f"No model found in the '{stage}' stage for '{model_name}' "
 
-        model_uri = f"{model_name}/{latest_version}"
+        model_uri = f"models:/{model_name}/{latest_version}"
         model = mlflow.pyfunc.load_model(model_uri)
 
         # load the vectorizer
