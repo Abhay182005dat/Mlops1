@@ -103,6 +103,9 @@ jobs:
         run: |
           nohup python flask_app/app.py &
           
+      - name: wait for flask to start
+        run: sleep 10
+        
       - name: Run Flask API tests
         run: pytest scripts/test_flask_app.py
       
