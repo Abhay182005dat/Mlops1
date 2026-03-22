@@ -45,4 +45,4 @@ def test_model_with_vectorizer(model_name , stage , vectorizer_path):
         print(f"Model '{model_name}' version {latest_version} successfully processed the dummy input text")
 
     except Exception as e:
-        pytest.fail('Model test failed with error : {e} ') 
+        pytest.fail(f'Model test failed with error : {e} ') 
