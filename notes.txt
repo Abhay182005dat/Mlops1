@@ -80,7 +80,7 @@ push code and trigger pipeline
 ensure permissions are set properly 
     Settings -> actions -> general
     workflow permissions -> read and write permissions
-    
+
 model testing 1 -> check model loading
 model testing 2 -> check model signature
 
@@ -94,3 +94,6 @@ changes occurred through the pipeline run.
 
 thats why , as we cannot always manually push the changes to dvc and git we use gitbot to make commits automatically 
 after the dvc pipeline is run.
+
+so after running pipeline note you should also do git pull whenever you are working on repo after the
+completion of workflow. 

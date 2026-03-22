@@ -66,6 +66,18 @@ jobs:
           git push origin ${{ github.ref_name }}  # see here once you push our main ci workflow will again trigger 
                                                   # our pipleine once again , in this way it will be inside infinite 
                                                   # hence we use ${{ github.actor != 'github-actions[bot]' }}
+# Add the model testing scripts to cicd pipeline
+      - name: Install test dependencies
+        run: |
+          pip install pytest
+      
+      - name: Run model loading test
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secretS.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: eu-north-1
+        run: |
+          pytest scripts/test_model_loading.py
 
       
 
