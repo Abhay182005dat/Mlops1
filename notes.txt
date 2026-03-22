@@ -113,3 +113,6 @@ generate requirements
 
 -> using ci workflow
 -> pull and test
+
+-----------------------------------
+create a new launch template
