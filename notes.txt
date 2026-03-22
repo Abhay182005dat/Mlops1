@@ -109,7 +109,7 @@ generate requirements
 -> create ecr repo 
 -> push to ecr 
 -> pull and run : docker pull arn_code/name:latest
-                  docker run -p 8888:5000 -e AWS_ACCESS_KEY_ID=yourkey -e AES_SECREET_ACCESS=YOURSECRET arnid/name:latest
+                  docker run -p 8888:5000 -e AWS_ACCESS_KEY_ID=yourkey -e AWS_SECRET_ACCESS_KEY=YOURSECRET arnid/name:latest
 
 -> using ci workflow
 -> pull and test
