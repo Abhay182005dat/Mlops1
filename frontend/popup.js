@@ -1,7 +1,7 @@
 // popup.js
 
 const API_BASE   = "http://localhost:5000";
-const YT_API_KEY = "AIzaSyDg6aYZ6fTdfz8_qi8876UYd0mnuvbMa7k";
+const YT_API_KEY = "YOUR YT API";
 const MAX_COMMENTS = 100;
 
 const analyzeBtn = document.getElementById("analyzeBtn");
